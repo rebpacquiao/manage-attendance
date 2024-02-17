@@ -1,0 +1,80 @@
+.attendance-container {
+  display: flex;
+  height: 100vh;
+}
+
+.data-table-section {
+  width: 80%;
+  padding: 24px;
+}
+
+.attendance-left-section {
+  border-right: 1px solid #ddd;
+  width: 20%;
+
+  .top-left-section,
+  .mid-left-section,
+  .filter-section {
+    padding: 24px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .cta-left-section {
+    padding: 24px;
+  }
+
+  h2 {
+    font-size: 24px;
+    font-weight: 500;
+    color: $headingColor;
+    margin-bottom: 15px;
+  }
+
+  .left-nav {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+  }
+
+  .left-nav-item {
+    padding: 10px;
+    border-radius: 4px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .default-left-icon-color {
+    color: $midNeutral;
+  }
+
+  .success {
+    background-color: $success;
+    color: $headingColor;
+    font-weight: 600;
+
+    .green-color {
+      color: $green;
+    }
+  }
+}
+
+.calendar-container {
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  .calendar-icon {
+    color: $green;
+  }
+}
+
+.search-left-button {
+  background-color: $green;
+}
+
+.w-100 {
+  width: 100%;
+}
