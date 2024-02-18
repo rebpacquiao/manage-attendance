@@ -27,7 +27,7 @@
           </button>
         </div>
       </div>
-      <div class="mid-left-section">
+      <div class="mid-left-section" v-if="isActiveContent">
         <div class="filter-heading">
           <h5>Date Range</h5>
         </div>
@@ -58,7 +58,7 @@
           </div>
         </NFlex>
       </div>
-      <div class="filter-section">
+      <div class="filter-section" v-if="isActiveContent">
         <div class="filter-heading">
           <h5>Filters</h5>
           <NButton quaternary round type="info">Show all</NButton>
@@ -82,7 +82,7 @@
           </div>
         </NSpace>
       </div>
-      <div class="cta-left-section">
+      <div class="cta-left-section" v-if="isActiveContent">
         <NFlex vertical>
           <NButton
             size="large"

@@ -139,7 +139,6 @@ const menuOptions = ref([
 
 const handleSearch = (query) => {
   const filteredData = SearchHelper(Employee, query);
-  // Do something with filteredData, if needed
 };
 </script>
 
