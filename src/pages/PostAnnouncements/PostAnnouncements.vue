@@ -19,6 +19,11 @@
         <div class="announcement-filter">
           <div class="announcement-left"></div>
           <div class="announcement-search">
+            <NSelect
+              :v-model:value="selectFilterBy"
+              placeholder="Filter by"
+              :options="filterBy"
+            />
             <NInput
               v-model:value="searchAnnouncement"
               type="text"
@@ -53,6 +58,7 @@ import {
   NLayoutContent,
   NDataTable,
   NInput,
+  NSelect,
 } from "naive-ui";
 import { h, reactive, computed, ref, watchEffect } from "vue";
 import MagnifyIcon from "vue-material-design-icons/Magnify.vue";
@@ -63,6 +69,7 @@ import { useStore } from "vuex";
 const store = useStore();
 
 const searchAnnouncement = ref("");
+const selectFilterBy = ref(null);
 
 const columns = [
   {
@@ -113,6 +120,21 @@ const columns = [
     sorter: "default",
   },
 ];
+
+const filterBy = ref([
+  {
+    label: "Title",
+    value: "title",
+  },
+  {
+    label: "Message",
+    value: "message",
+  },
+  {
+    label: "Sent By",
+    value: "sentBy",
+  },
+]);
 
 const pagination = reactive({
   pageSize: 10,

@@ -25,6 +25,13 @@
     }
   }
 
+  .announcement-search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 550px;
+  }
+
   .announcement-link {
     background-color: $green;
     padding: 10px;
