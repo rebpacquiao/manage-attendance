@@ -116,6 +116,38 @@
       <ExportedFiles />
     </div>
   </div>
+  <NModal :show="showModal">
+    <NCard
+      style="width: 600px"
+      title="Edit Data"
+      :bordered="false"
+      size="huge"
+      role="dialog"
+      aria-modal="true"
+    >
+      <template #header-extra>
+        <NButton class="close-modal" @click="closeModal" quaternary
+          ><Close
+        /></NButton>
+      </template>
+      <NFlex vertical>
+        <div
+          v-for="(field, index) in formFields"
+          :key="index"
+          class="modal-field"
+        >
+          <label>{{ field.label }}</label>
+          <NInput
+            v-model:value="field.value"
+            :type="field.type"
+            :placeholder="field.placeholder"
+          />
+        </div>
+      </NFlex>
+
+      <NButton class="modal-save" type="success" disabled>Save</NButton>
+    </NCard>
+  </NModal>
 </template>
 
 <script>
@@ -125,20 +157,31 @@ export default {
 </script>
 
 <script setup>
-import { NDataTable, NSelect, NSpace, NDatePicker } from "naive-ui";
-import { reactive, computed, watchEffect } from "vue";
+import {
+  NDataTable,
+  NSelect,
+  NSpace,
+  NDatePicker,
+  NModal,
+  NCard,
+  NText,
+  NButton,
+  NFlex,
+  NInput,
+} from "naive-ui";
+import { reactive, computed, watchEffect, h } from "vue";
 import ExportedFiles from "@/pages/ExportedFiles/ExportedFiles.vue";
 import CalendarClock from "vue-material-design-icons/CalendarClock.vue";
+import Close from "vue-material-design-icons/Close.vue";
 import DownloadNetworkOutline from "vue-material-design-icons/DownloadNetworkOutline.vue";
 import { ref } from "vue";
-import { NFlex, NButton } from "naive-ui";
 import MagnifyIcon from "vue-material-design-icons/Magnify.vue";
 import { companyData } from "@/data/companyData.js";
 import { deparmentData } from "@/data/departmentData.js";
 import { locationsData } from "@/data/locationData.js";
 import { Employee } from "@/data/employee.js";
 import store from "@/store";
-import { columns } from "./AttendanceLogsColumn";
+import SquareEditOutline from "vue-material-design-icons/SquareEditOutline.vue";
 
 const activeAttendance = ref("success");
 const activeExported = ref(String);
@@ -156,6 +199,110 @@ const isDateTo = ref(null);
 
 const showDateFrom = ref(null);
 const showDateTo = ref(null);
+const showModal = ref(false);
+
+const isFirstName = ref(null);
+const isLastName = ref(null);
+const isLocation = ref(null);
+const isProjectName = ref(null);
+
+const columns = [
+  {
+    title: "Name",
+    key: "name",
+    sorter: "default",
+    render(row) {
+      return h("div", [
+        h("span", row.firstName),
+        h("span", { class: "last-name" }, row.lastName),
+        h("span", { class: "employee-id" }, row.employeeId),
+      ]);
+    },
+  },
+  {
+    title: "Date",
+    key: "date",
+    sorter: "default",
+  },
+  {
+    title: "Time",
+    key: "time",
+  },
+  {
+    title: "In/Out",
+    key: "inOut",
+    sorter: "default",
+    render(row) {
+      let inOutColor = "info";
+      row.inOut === "In" ? (inOutColor = "info") : (inOutColor = "warning");
+      return h(NText, { type: inOutColor, strong: true }, row.inOut);
+    },
+  },
+  {
+    title: "Log Details",
+    key: "logDetails",
+    sorter: "default",
+    render(row) {
+      return h(
+        NButton,
+        { type: "default", strong: true, primary: true },
+        row.logDetails
+      );
+    },
+  },
+  {
+    title: "Location",
+    key: "location",
+    sorter: "default",
+  },
+  {
+    title: "Project Name",
+    key: "projectName",
+    sorter: "default",
+  },
+  {
+    title: "Action",
+    key: "action",
+    render(row, { emit }) {
+      return h(
+        NButton,
+        {
+          type: "warning",
+          quaternary: true,
+          onClick: () => handleEditClick(row),
+        },
+        () => h(SquareEditOutline)
+      );
+    },
+  },
+];
+
+const formFields = ref([
+  {
+    label: "First Name",
+    value: isFirstName,
+    type: "text",
+    placeholder: "Enter First Name",
+  },
+  {
+    label: "Last Name",
+    value: isLastName,
+    type: "text",
+    placeholder: "Enter Last Name",
+  },
+  {
+    label: "Location",
+    value: isLocation,
+    type: "text",
+    placeholder: "Enter Location",
+  },
+  {
+    label: "Project Name",
+    value: isProjectName,
+    type: "text",
+    placeholder: "Enter Project",
+  },
+]);
 
 const filters = ref([
   {
@@ -295,6 +442,19 @@ const displayRange = computed(() => {
   );
   return `${startIndex}-${endIndex} of ${pagination.total}`;
 });
+
+const handleEditClick = (row) => {
+  showModal.value = true;
+
+  isFirstName.value = row.firstName;
+  isLastName.value = row.lastName;
+  isLocation.value = row.location;
+  isProjectName.value = row.projectName;
+};
+
+const closeModal = () => {
+  showModal.value = false;
+};
 </script>
 
 <style lang="scss">
