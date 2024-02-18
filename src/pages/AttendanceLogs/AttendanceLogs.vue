@@ -125,8 +125,8 @@ export default {
 </script>
 
 <script setup>
-import { NDataTable, NSelect, NSpace, NDatePicker, NText } from "naive-ui";
-import { h, reactive, computed, watchEffect } from "vue";
+import { NDataTable, NSelect, NSpace, NDatePicker } from "naive-ui";
+import { reactive, computed, watchEffect } from "vue";
 import ExportedFiles from "@/pages/ExportedFiles/ExportedFiles.vue";
 import CalendarClock from "vue-material-design-icons/CalendarClock.vue";
 import DownloadNetworkOutline from "vue-material-design-icons/DownloadNetworkOutline.vue";
@@ -138,6 +138,7 @@ import { deparmentData } from "@/data/departmentData.js";
 import { locationsData } from "@/data/locationData.js";
 import { Employee } from "@/data/employee.js";
 import store from "@/store";
+import { columns } from "./AttendanceLogsColumn";
 
 const activeAttendance = ref("success");
 const activeExported = ref(String);
@@ -155,62 +156,6 @@ const isDateTo = ref(null);
 
 const showDateFrom = ref(null);
 const showDateTo = ref(null);
-
-const columns = [
-  {
-    title: "Name",
-    key: "name",
-    sorter: "default",
-    render(row) {
-      return h("div", [
-        h("span", row.firstName),
-        h("span", { class: "last-name" }, row.lastName),
-        h("span", { class: "employee-id" }, row.employeeId),
-      ]);
-    },
-  },
-  {
-    title: "Date",
-    key: "date",
-    sorter: "default",
-  },
-  {
-    title: "Time",
-    key: "time",
-  },
-  {
-    title: "In/Out",
-    key: "inOut",
-    sorter: "default",
-    render(row) {
-      let inOutColor = "info";
-      row.inOut === "In" ? (inOutColor = "info") : (inOutColor = "warning");
-      return h(NText, { type: inOutColor, strong: true }, row.inOut);
-    },
-  },
-  {
-    title: "Log Details",
-    key: "logDetails",
-    sorter: "default",
-    render(row) {
-      return h(
-        NButton,
-        { type: "tertiary", strong: true, primary: true },
-        row.logDetails
-      );
-    },
-  },
-  {
-    title: "Location",
-    key: "location",
-    sorter: "default",
-  },
-  {
-    title: "Project Name",
-    key: "projectName",
-    sorter: "default",
-  },
-];
 
 const filters = ref([
   {
