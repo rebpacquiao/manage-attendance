@@ -28,10 +28,50 @@
         </div>
       </div>
       <div class="mid-left-section">
-        <datePicker />
+        <div class="filter-heading">
+          <h5>Date Range</h5>
+        </div>
+        <NFlex vertical>
+          <div
+            v-for="filterItem in filterItems"
+            :key="filterItem.label"
+            :class="filterItem.class"
+          >
+            <label>{{ filterItem.label }}</label>
+            <NDatePicker
+              v-model="filterItem.model"
+              @update:value="handleSelectedDate"
+              type="date"
+              size="large"
+              format="MM/dd/yyyy"
+              :placeholder="filterItem.placeholder"
+            />
+          </div>
+        </NFlex>
       </div>
       <div class="filter-section">
-        <FilterComponent />
+        <div class="filter-heading">
+          <h5>Filters</h5>
+          <NButton quaternary round type="info">Show all</NButton>
+        </div>
+        <NSpace vertical>
+          <div
+            v-for="(filter, index) in filters"
+            :key="index"
+            class="filter-items"
+          >
+            <label>{{ filter.label }}</label>
+            <NSelect
+              clearable
+              :v-model:value="filter.model"
+              :placeholder="filter.placeholder"
+              :options="filter.options"
+              size="large"
+              :multiple="filter.multiple"
+              @change="handleSelectChange"
+            />
+          </div>
+        </NSpace>
       </div>
       <div class="cta-left-section">
         <NFlex vertical>
@@ -70,16 +110,18 @@ export default {
 </script>
 
 <script setup>
-import { NDataTable } from "naive-ui";
+import { NDataTable, NSelect, NSpace, NDatePicker } from "naive-ui";
 import { h, reactive, computed, watchEffect } from "vue";
 import ExportedFiles from "@/pages/ExportedFiles/ExportedFiles.vue";
-import datePicker from "@/components/DatePicker/DatePicker.vue";
-import FilterComponent from "@/components/Filters/Filters.vue";
 import CalendarClock from "vue-material-design-icons/CalendarClock.vue";
 import DownloadNetworkOutline from "vue-material-design-icons/DownloadNetworkOutline.vue";
 import { ref } from "vue";
 import { NFlex, NButton } from "naive-ui";
 import MagnifyIcon from "vue-material-design-icons/Magnify.vue";
+import { companyData } from "@/data/companyData.js";
+import { deparmentData } from "@/data/departmentData.js";
+import { locationsData } from "@/data/locationData.js";
+import { Employee } from "@/data/employee.js";
 import store from "@/store";
 
 const activeAttendance = ref("success");
@@ -92,6 +134,8 @@ const isDecription = ref(
 );
 const exportedLabel = ref("Exported Files");
 const searchLabel = ref("Search");
+const isDateFrom = ref(String);
+const isDateTo = ref(String);
 
 const columns = [
   {
@@ -127,6 +171,55 @@ const columns = [
   },
 ];
 
+const filterItems = ref([
+  {
+    label: "Date From",
+    class: "filter-items",
+    model: "dateFrom",
+    placeholder: "Select date",
+  },
+  {
+    label: "Date To",
+    class: "filter-items",
+    model: "dateTo",
+    placeholder: "Select date",
+  },
+]);
+
+const filters = ref([
+  {
+    label: "Company",
+    model: "selectedCompany",
+    placeholder: "Select company",
+    options: companyData,
+    multiple: false,
+  },
+  {
+    label: "Department",
+    model: "selectedDeparment",
+    placeholder: "Select department",
+    options: deparmentData,
+    multiple: false,
+  },
+  {
+    label: "Location",
+    model: "selectedLocation",
+    placeholder: "Select location",
+    options: locationsData,
+    multiple: false,
+  },
+  {
+    label: "Employee",
+    model: "selectedEmployee",
+    placeholder: "Select employee",
+    multiple: true,
+    options: Employee.map((employee) => ({
+      label: `${employee.firstName} ${employee.lastName}`,
+      value: `${employee.firstName} ${employee.lastName}`,
+    })),
+  },
+]);
+
 const pagination = reactive({
   pageSize: 15,
   page: 1,
@@ -159,6 +252,27 @@ const initExportedLogs = () => {
   isActiveContent.value = false;
   activeAttendance.value = "";
   activeExported.value = "success";
+};
+
+const handleSelectChange = (selectedValue) => {
+  console.log(`Selected value for `, selectedValue);
+};
+
+const handleSelectedDate = (rawValue) => {
+  const date = new Date(rawValue);
+
+  if (isNaN(date.getTime())) {
+    console.error("Invalid date object");
+    return;
+  }
+
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const day = date.getDate().toString().padStart(2, "0");
+  const year = date.getFullYear();
+
+  const formattedDate = `${month}/${day}/${year}`;
+
+  console.log(`Selected date: `, formattedDate);
 };
 </script>
 
