@@ -109,6 +109,7 @@
           :data="filteredData"
           :pagination="pagination"
         />
+        <div class="range-section">Showing {{ displayRange }}</div>
       </NFlex>
     </div>
     <div class="exported-section" v-else>
@@ -334,6 +335,15 @@ const initSearch = () => {
 
   store.dispatch("updateFilteredData", filteredData.value);
 };
+
+const displayRange = computed(() => {
+  const startIndex = (pagination.page - 1) * pagination.pageSize + 1;
+  const endIndex = Math.min(
+    startIndex + pagination.pageSize - 1,
+    pagination.total
+  );
+  return `${startIndex}-${endIndex} of ${pagination.total}`;
+});
 </script>
 
 <style lang="scss">
