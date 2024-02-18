@@ -32,19 +32,26 @@
           <h5>Date Range</h5>
         </div>
         <NFlex vertical>
-          <div
-            v-for="filterItem in filterItems"
-            :key="filterItem.label"
-            :class="filterItem.class"
-          >
-            <label>{{ filterItem.label }}</label>
+          <div class="filter-items">
+            <label>Date From</label>
             <NDatePicker
-              v-model="filterItem.model"
-              @update:value="handleSelectedDate"
+              v-model="dateFrom"
+              @update:value="handleDateFrom"
               type="date"
               size="large"
               format="MM/dd/yyyy"
-              :placeholder="filterItem.placeholder"
+              placeholder="Select date"
+            />
+          </div>
+          <div class="filter-items">
+            <label>Date To</label>
+            <NDatePicker
+              v-model="dateTo"
+              @update:value="handleDateTo"
+              type="date"
+              size="large"
+              format="MM/dd/yyyy"
+              placeholder="Select date"
             />
           </div>
         </NFlex>
@@ -75,7 +82,12 @@
       </div>
       <div class="cta-left-section">
         <NFlex vertical>
-          <NButton size="large" class="search-left-button w-100" type="success">
+          <NButton
+            size="large"
+            @click="initSearch"
+            class="search-left-button w-100"
+            type="success"
+          >
             <MagnifyIcon /> {{ searchLabel }}
           </NButton>
           <NButton size="large" class="w-100" disabled>
@@ -88,7 +100,7 @@
       <NFlex vertical>
         <div class="calendar-container">
           <CalendarClock class="calendar-icon" />
-          <strong>March 01, 2022 - March 16, 2022</strong>
+          <strong v-if="isDate">{{ showDateFrom }} - {{ showDateTo }}</strong>
         </div>
         <NDataTable
           :columns="columns"
@@ -134,8 +146,12 @@ const isDecription = ref(
 );
 const exportedLabel = ref("Exported Files");
 const searchLabel = ref("Search");
-const isDateFrom = ref(String);
-const isDateTo = ref(String);
+const isDate = ref(false);
+const isDateFrom = ref(null);
+const isDateTo = ref(null);
+
+const showDateFrom = ref(null);
+const showDateTo = ref(null);
 
 const columns = [
   {
@@ -170,21 +186,6 @@ const columns = [
     key: "projectName",
   },
 ];
-
-const filterItems = ref([
-  {
-    label: "Date From",
-    class: "filter-items",
-    model: "dateFrom",
-    placeholder: "Select date",
-  },
-  {
-    label: "Date To",
-    class: "filter-items",
-    model: "dateTo",
-    placeholder: "Select date",
-  },
-]);
 
 const filters = ref([
   {
@@ -258,7 +259,15 @@ const handleSelectChange = (selectedValue) => {
   console.log(`Selected value for `, selectedValue);
 };
 
-const handleSelectedDate = (rawValue) => {
+const handleDateFrom = (date) => {
+  isDateFrom.value = dateFormat(date);
+};
+
+const handleDateTo = (date) => {
+  isDateTo.value = dateFormat(date);
+};
+
+const dateFormat = (rawValue) => {
   const date = new Date(rawValue);
 
   if (isNaN(date.getTime())) {
@@ -272,7 +281,27 @@ const handleSelectedDate = (rawValue) => {
 
   const formattedDate = `${month}/${day}/${year}`;
 
-  console.log(`Selected date: `, formattedDate);
+  return formattedDate;
+};
+
+const dataTableDateFormat = (rawValue) => {
+  const date = new Date(rawValue);
+
+  if (isNaN(date.getTime())) {
+    console.error("Invalid date object");
+    return;
+  }
+
+  const options = { month: "long", day: "numeric", year: "numeric" };
+  const formattedDate = new Intl.DateTimeFormat("en-US", options).format(date);
+
+  return formattedDate;
+};
+
+const initSearch = () => {
+  showDateFrom.value = dataTableDateFormat(isDateFrom.value);
+  showDateTo.value = dataTableDateFormat(isDateTo.value);
+  isDate.value = true;
 };
 </script>
 
