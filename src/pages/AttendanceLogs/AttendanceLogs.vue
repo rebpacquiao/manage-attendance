@@ -160,7 +160,11 @@ const columns = [
     title: "Name",
     key: "name",
     render(row) {
-      return h("span", row.firstName + " " + row.lastName);
+      return h("div", [
+        h("span", row.firstName),
+        h("span", { class: "last-name" }, row.lastName),
+        h("span", { class: "employee-id" }, row.employeeId),
+      ]);
     },
   },
   {
@@ -229,10 +233,10 @@ const filters = ref([
 ]);
 
 const pagination = reactive({
-  pageSize: 15,
+  pageSize: 10,
   page: 1,
   showSizePicker: true,
-  pageSizes: [5, 10, 25, 50],
+  pageSizes: [5, 10],
   onChange: (page) => {
     pagination.page = page;
   },
