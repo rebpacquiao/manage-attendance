@@ -2,7 +2,7 @@ export const Employee = [
   {
     firstName: "Aguas",
     lastName: "Doe",
-    date: "03/16/2022",
+    date: "02/18/2024",
     time: "01:34 PM",
     inOut: "In",
     logDetails: "App",

@@ -41,6 +41,7 @@
               size="large"
               format="MM/dd/yyyy"
               placeholder="Select date"
+              clearable
             />
           </div>
           <div class="filter-items">
@@ -52,6 +53,7 @@
               size="large"
               format="MM/dd/yyyy"
               placeholder="Select date"
+              clearable
             />
           </div>
         </NFlex>
@@ -122,7 +124,7 @@ export default {
 </script>
 
 <script setup>
-import { NDataTable, NSelect, NSpace, NDatePicker } from "naive-ui";
+import { NDataTable, NSelect, NSpace, NDatePicker, NText } from "naive-ui";
 import { h, reactive, computed, watchEffect } from "vue";
 import ExportedFiles from "@/pages/ExportedFiles/ExportedFiles.vue";
 import CalendarClock from "vue-material-design-icons/CalendarClock.vue";
@@ -172,6 +174,11 @@ const columns = [
   {
     title: "In/Out",
     key: "inOut",
+    render(row) {
+      let inOutColor = "info";
+      row.inOut === "In" ? (inOutColor = "info") : (inOutColor = "warning");
+      return h(NText, { type: inOutColor, strong: true }, row.inOut);
+    },
   },
   {
     title: "Log Details",
@@ -236,7 +243,17 @@ const pagination = reactive({
 });
 
 const filteredData = computed(() => {
-  return store.getters.getFilteredData;
+  const startDate = isDateFrom.value;
+  const endDate = isDateTo.value;
+
+  // Filter data based on date range
+  return store.getters.getFilteredData.filter((item) => {
+    const itemDate = new Date(item.date);
+    return (
+      (!startDate || itemDate >= new Date(startDate)) &&
+      (!endDate || itemDate <= new Date(endDate))
+    );
+  });
 });
 
 watchEffect(() => {
@@ -299,9 +316,12 @@ const dataTableDateFormat = (rawValue) => {
 };
 
 const initSearch = () => {
-  showDateFrom.value = dataTableDateFormat(isDateFrom.value);
+  if (isDateFrom.value !== undefined || isDateTo.value !== undefined)
+    showDateFrom.value = dataTableDateFormat(isDateFrom.value);
   showDateTo.value = dataTableDateFormat(isDateTo.value);
   isDate.value = true;
+
+  store.dispatch("updateFilteredData", filteredData.value);
 };
 </script>
 
