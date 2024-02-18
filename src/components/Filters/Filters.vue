@@ -3,10 +3,12 @@
     <div v-for="(filter, index) in filters" :key="index" class="filter-items">
       <label>{{ filter.label }}</label>
       <NSelect
+        clearable
         :v-model:value="filter.model"
         :placeholder="filter.placeholder"
         :options="filter.options"
         size="large"
+        :multiple="filter.multiple"
         @change="handleSelectChange"
       />
     </div>
@@ -35,23 +37,27 @@ export default defineComponent({
           model: "selectedCompany",
           placeholder: "Select company",
           options: companyData,
+          multiple: false,
         },
         {
           label: "Department",
           model: "selectedDeparment",
           placeholder: "Select department",
           options: deparmentData,
+          multiple: false,
         },
         {
           label: "Location",
           model: "selectedLocation",
           placeholder: "Select location",
           options: locationsData,
+          multiple: false,
         },
         {
           label: "Employee",
           model: "selectedEmployee",
           placeholder: "Select employee",
+          multiple: true,
           options: Employee.map((employee) => ({
             label: `${employee.firstName} ${employee.lastName}`,
             value: `${employee.firstName} ${employee.lastName}`,
