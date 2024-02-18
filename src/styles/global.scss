@@ -4,16 +4,7 @@
 @import url("https://fonts.googleapis.com");
 @import url("https://fonts.gstatic.com");
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
-
-$white: #fff;
-$headerBackground: #333333;
-$admin: #2fc7e2;
-$notification: #c4c4c4;
-$headingColor: #00291b;
-$success: #e6ffee;
-$floatLabelColor: #c3cdc9;
-$green: #17ad49;
-$midNeutral: #788e86;
+@import url("./variable.scss");
 
 body {
   font-family: "Rubik", sans-serif;
