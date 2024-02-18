@@ -113,11 +113,23 @@ const columns = [
     title: "Start Date",
     key: "startDate",
     sorter: "default",
+    render(row) {
+      return h("div", { class: "time-date" }, [
+        h("span", { class: "start-date" }, [row.startDate]),
+        h("span", { class: "start-time" }, [row.timeCreated]),
+      ]);
+    },
   },
   {
     title: "End Date",
     key: "endDate",
     sorter: "default",
+    render(row) {
+      return h("div", { class: "time-date" }, [
+        h("span", { class: "start-date" }, [row.endDate]),
+        h("span", { class: "start-time" }, [row.endTimeCreated]),
+      ]);
+    },
   },
 ];
 
