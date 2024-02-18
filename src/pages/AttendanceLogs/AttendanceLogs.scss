@@ -69,9 +69,23 @@
   .calendar-icon {
     color: $green;
   }
+
+  .announcement-link {
+    background-color: $green;
+    padding: 10px;
+    color: $white;
+    border-radius: 4px;
+  }
+
+  .calendar-left {
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
 }
 
-.search-left-button {
+#search-left-button {
   background-color: $green;
 }
 

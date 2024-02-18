@@ -87,6 +87,7 @@
           <NButton
             size="large"
             @click="initSearch"
+            id="search-left-button"
             class="search-left-button w-100"
             type="success"
           >
@@ -101,8 +102,13 @@
     <div class="data-table-section" v-if="isActiveContent">
       <NFlex vertical>
         <div class="calendar-container">
-          <CalendarClock class="calendar-icon" />
-          <strong v-if="isDate">{{ showDateFrom }} - {{ showDateTo }}</strong>
+          <div class="calendar-left">
+            <CalendarClock class="calendar-icon" />
+            <strong v-if="isDate">{{ showDateFrom }} - {{ showDateTo }}</strong>
+          </div>
+          <a class="announcement-link" href="/post-announcements"
+            >Post Announcements</a
+          >
         </div>
         <NDataTable
           :columns="columns"

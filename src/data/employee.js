@@ -10,6 +10,7 @@ export const Employee = [
     notes: "sample note",
     projectName: "Notification",
     employeeId: 456,
+    companyName: "Sprout Solutions",
   },
   {
     firstName: "Smith",
@@ -22,6 +23,7 @@ export const Employee = [
     notes: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     projectName: "Analytics Dashboard",
     employeeId: 356,
+    companyName: "Sprout Solutions",
   },
   {
     firstName: "Johnson",
@@ -34,6 +36,7 @@ export const Employee = [
     notes: "Another sample note",
     projectName: "E-commerce Platform",
     employeeId: 457,
+    companyName: "Sprout Solutions",
   },
   {
     firstName: "Gonzalez",
@@ -46,6 +49,7 @@ export const Employee = [
     notes: "Quis autem vel eum iure reprehenderit.",
     projectName: "Customer Support System",
     employeeId: 426,
+    companyName: "Sprout Solutions",
   },
   {
     firstName: "Chen",
@@ -58,6 +62,7 @@ export const Employee = [
     notes: "Additional note here",
     projectName: "Inventory Management",
     employeeId: 156,
+    companyName: "Sprout Solutions",
   },
   {
     firstName: "Ramirez",
@@ -70,6 +75,7 @@ export const Employee = [
     notes: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     projectName: "Marketing Campaign",
     employeeId: 3356,
+    companyName: "Sprout Solutions",
   },
   {
     firstName: "Kim",
@@ -82,6 +88,7 @@ export const Employee = [
     notes: "Yet another note",
     projectName: "Project X",
     employeeId: 2256,
+    companyName: "TechCo Solutions",
   },
   {
     firstName: "Santos",
@@ -94,6 +101,7 @@ export const Employee = [
     notes: "Duis aute irure dolor in reprehenderit.",
     projectName: "HR Management System",
     employeeId: 4886,
+    companyName: "TechCo Solutions",
   },
   {
     firstName: "Ramos",
@@ -106,6 +114,7 @@ export const Employee = [
     notes: "Excepteur sint occaecat cupidatat non proident.",
     projectName: "Finance Dashboard",
     employeeId: 4568,
+    companyName: "TechCo Solutions",
   },
   {
     firstName: "Ong",
@@ -118,6 +127,7 @@ export const Employee = [
     notes: "Ut enim ad minima veniam, quis nostrum exercitationem.",
     projectName: "Inventory Tracking",
     employeeId: 1056,
+    companyName: "TechCo Solutions",
   },
   {
     firstName: "Tan",
@@ -130,6 +140,7 @@ export const Employee = [
     notes: "Sed ut perspiciatis unde omnis iste natus error sit.",
     projectName: "Customer Relationship Management",
     employeeId: 456,
+    companyName: "GreenLeaf Organics",
   },
   {
     firstName: "Velasco",
@@ -142,6 +153,7 @@ export const Employee = [
     notes: "Nemo enim ipsam voluptatem quia voluptas sit aspernatur.",
     projectName: "Social Media Integration",
     employeeId: 150,
+    companyName: "GreenLeaf Organics",
   },
   {
     firstName: "Gomez",
@@ -154,6 +166,7 @@ export const Employee = [
     notes: "At vero eos et accusamus et iusto odio dignissimos.",
     projectName: "Sales Reporting",
     employeeId: 320,
+    companyName: "GreenLeaf Organics",
   },
   {
     firstName: "Espinoza",
@@ -166,6 +179,7 @@ export const Employee = [
     notes: "Corrupti quos dolores et quas molestias excepturi.",
     projectName: "Employee Training Platform",
     employeeId: 210,
+    companyName: "GreenLeaf Organics",
   },
   {
     firstName: "Luna",
@@ -178,6 +192,7 @@ export const Employee = [
     notes: "Eaque ipsa quae ab illo inventore veritatis et quasi.",
     projectName: "Quality Assurance System",
     employeeId: 112,
+    companyName: "SwiftExpress Logistics",
   },
   {
     firstName: "Yap",
@@ -190,6 +205,7 @@ export const Employee = [
     notes: "Architecto beatae vitae dicta sunt explicabo.",
     projectName: "Task Management",
     employeeId: 311,
+    companyName: "SwiftExpress Logistics",
   },
   {
     firstName: "Sison",
@@ -202,5 +218,6 @@ export const Employee = [
     notes: "Illum qui dolorem eum fugiat quo voluptas nulla pariatur.",
     projectName: "Event Planning",
     employeeId: 118,
+    companyName: "SwiftExpress Logistics",
   },
 ];

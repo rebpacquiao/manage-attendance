@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import ManageAttendanceHome from "@/pages/Home/ManageHome.vue";
 import AttendanceLogs from "@/pages/AttendanceLogs/AttendanceLogs";
 import ExportedFiles from "@/pages/ExportedFiles/ExportedFiles";
+import PostAnnouncements from "@/pages/PostAnnouncements/PostAnnouncements";
 
 const routes = [
   {
@@ -18,6 +19,11 @@ const routes = [
     path: "/exported-files",
     component: ExportedFiles,
     name: ExportedFiles,
+  },
+  {
+    path: "/post-announcements",
+    component: PostAnnouncements,
+    name: PostAnnouncements,
   },
 ];
 
