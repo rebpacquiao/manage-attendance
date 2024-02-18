@@ -24,7 +24,11 @@
               type="text"
               placeholder="Search Title, Message, Sent By"
               @input="handleSearch"
-            />
+            >
+              <template #suffix>
+                <MagnifyIcon />
+              </template>
+            </NInput>
           </div>
         </div>
         <NDataTable
@@ -50,7 +54,11 @@ import {
   NDataTable,
   NInput,
 } from "naive-ui";
-import { h, reactive, computed, ref } from "vue";
+import { h, reactive, computed, ref, watchEffect } from "vue";
+import MagnifyIcon from "vue-material-design-icons/Magnify.vue";
+import ClockTimeEight from "vue-material-design-icons/ClockTimeEight.vue";
+import Cellphone from "vue-material-design-icons/Cellphone.vue";
+import EmailNewsletter from "vue-material-design-icons/EmailNewsletter.vue";
 import { useStore } from "vuex";
 const store = useStore();
 
@@ -76,6 +84,18 @@ const columns = [
     title: "Sent By",
     key: "sentBy",
     sorter: "default",
+  },
+  {
+    title: "Sent Through",
+    key: "sent-throught",
+    sorter: "default",
+    render() {
+      return h("div", { class: "icons" }, [
+        h("span", { class: "icon" }, [h(ClockTimeEight)]),
+        h("span", { class: "icon" }, [h(Cellphone)]),
+        h("span", { class: "icon" }, [h(EmailNewsletter)]),
+      ]);
+    },
   },
   {
     title: "Date Created",
@@ -123,6 +143,10 @@ const filteredLetters = computed(() => {
 const handleSearch = () => {
   store.dispatch("updateFilteredData", searchAnnouncement.value);
 };
+
+watchEffect(() => {
+  pagination.total = searchAnnouncement.value.length;
+});
 </script>
 
 <style lang="scss">
