@@ -160,6 +160,7 @@ const columns = [
   {
     title: "Name",
     key: "name",
+    sorter: "default",
     render(row) {
       return h("div", [
         h("span", row.firstName),
@@ -171,6 +172,7 @@ const columns = [
   {
     title: "Date",
     key: "date",
+    sorter: "default",
   },
   {
     title: "Time",
@@ -179,6 +181,7 @@ const columns = [
   {
     title: "In/Out",
     key: "inOut",
+    sorter: "default",
     render(row) {
       let inOutColor = "info";
       row.inOut === "In" ? (inOutColor = "info") : (inOutColor = "warning");
@@ -188,6 +191,7 @@ const columns = [
   {
     title: "Log Details",
     key: "logDetails",
+    sorter: "default",
     render(row) {
       return h(
         NButton,
@@ -199,10 +203,12 @@ const columns = [
   {
     title: "Location",
     key: "location",
+    sorter: "default",
   },
   {
     title: "Project Name",
     key: "projectName",
+    sorter: "default",
   },
 ];
 
