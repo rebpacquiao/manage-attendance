@@ -136,3 +136,46 @@
 .range-section {
   margin-top: -26px;
 }
+
+.exported-section {
+  width: 100%;
+  padding: 24px;
+
+  .n-card__content {
+    display: flex;
+  }
+}
+
+.col-card {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .col-exported-files {
+    align-self: center;
+    justify-content: center;
+    display: flex;
+  }
+}
+
+.no-data {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  h1 {
+    font-size: 28px;
+    font-weight: bold;
+  }
+}
+
+.page-heading {
+  h1 {
+    font-size: 26px;
+    font-weight: bold;
+  }
+
+  h5 {
+    margin-bottom: 15px;
+  }
+}
