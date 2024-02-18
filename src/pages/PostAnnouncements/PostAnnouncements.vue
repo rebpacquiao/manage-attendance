@@ -22,7 +22,7 @@
             <NInput
               v-model:value="searchAnnouncement"
               type="text"
-              placeholder="Search"
+              placeholder="Search Title, Message, Sent By"
               @input="handleSearch"
             />
           </div>
@@ -110,9 +110,13 @@ const pagination = reactive({
 
 const filteredLetters = computed(() => {
   return store.state.announcements.filter((announcement) => {
-    return announcement.title
-      .toLowerCase()
-      .includes(searchAnnouncement.value.toLowerCase());
+    const searchValue = searchAnnouncement.value.toLowerCase();
+
+    return (
+      announcement.title.toLowerCase().includes(searchValue) ||
+      announcement.message.toLowerCase().includes(searchValue) ||
+      announcement.sentBy.toLowerCase().includes(searchValue)
+    );
   });
 });
 
