@@ -187,6 +187,13 @@ const columns = [
   {
     title: "Log Details",
     key: "logDetails",
+    render(row) {
+      return h(
+        NButton,
+        { type: "tertiary", strong: true, primary: true },
+        row.logDetails
+      );
+    },
   },
   {
     title: "Location",
