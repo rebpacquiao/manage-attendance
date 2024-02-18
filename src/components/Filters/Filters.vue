@@ -3,10 +3,11 @@
     <div v-for="(filter, index) in filters" :key="index" class="filter-items">
       <label>{{ filter.label }}</label>
       <NSelect
-        :v-model="filter.model"
+        :v-model:value="filter.model"
         :placeholder="filter.placeholder"
         :options="filter.options"
         size="large"
+        @change="handleSelectChange"
       />
     </div>
   </NSpace>
@@ -65,6 +66,11 @@ export default defineComponent({
         label: `${employee.firstName} ${employee.lastName}`,
         value: `${employee.firstName} ${employee.lastName}`,
       }));
+    },
+  },
+  methods: {
+    handleSelectChange(selectedValue) {
+      console.log(`Selected value for `, selectedValue);
     },
   },
   setup() {
