@@ -19,7 +19,7 @@ git commit -m 'deploy'
 # if you are deploying to https://rebpacquiao.github.io
 # git push -f git@github.com:rebpacquiao/rebpacquiao.github.io.git main
 
-# if you are deploying to https://rebpacquiao.github.io/manage-attendance-app
-# git push -f git@github.com:rebpacquiao/manage-attendance-app.git main:gh-pages
+# if you are deploying to https://rebpacquiao.github.io/manage-attendance
+# git push -f git@github.com:rebpacquiao/manage-attendance.git main:gh-pages
 
 cd -
