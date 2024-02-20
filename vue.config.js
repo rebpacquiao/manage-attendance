@@ -1,7 +1,6 @@
 const { defineConfig } = require("@vue/cli-service");
 
 module.exports = defineConfig({
-  publicPath: "/manage-attendance/",
   transpileDependencies: true,
   css: {
     loaderOptions: {
